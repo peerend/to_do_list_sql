@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Task do
-  it 'is initialized with a name and a task ID' do
+  it 'is initialized with a name and a list ID' do
     task = Task.new('learn SQL', 1)
     task.should be_an_instance_of Task
   end
@@ -26,7 +26,7 @@ describe Task do
     Task.all.should eq [task]
   end
 
-  it 'is the same task if it has the same name and ID' do
+  it 'is the same task if it has the same name and list ID' do
     task1 = Task.new('learn SQL', 1)
     task2 = Task.new('learn SQL', 1)
     task1.should eq task2

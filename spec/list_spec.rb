@@ -2,16 +2,16 @@ require 'spec_helper'
 
 describe List do
   it 'is initialized with a name' do
-    task = List.new('Epicodus stuff')
-    task.should be_an_instance_of List
+    list = List.new('Epicodus stuff')
+    list.should be_an_instance_of List
   end
 
   it 'tells you its name' do
-    task = List.new('Epicodus stuff')
-    task.name.should eq 'Epicodus stuff'
+    list = List.new('Epicodus stuff')
+    list.name.should eq 'Epicodus stuff'
   end
 
-  it 'is the same list if it has the same name' do
+  it 'is the same list if it has the same name and id' do
     list1 = List.new('Epicodus stuff')
     list2 = List.new('Epicodus stuff')
     list1.should eq list2
