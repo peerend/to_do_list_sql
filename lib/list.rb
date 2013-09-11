@@ -1,11 +1,9 @@
 class List
+  attr_reader :name, :id
+
   def initialize(attributes)
     @name = attributes['name']
     @id = attributes['id']
-  end
-
-  def name
-    @name
   end
 
   def ==(another_list)
@@ -26,9 +24,5 @@ class List
   def save
     results = DB.exec("INSERT INTO lists (name) VALUES ('#{@name}') RETURNING id;")
     @id = results.first['id'].to_i
-  end
-
-  def id
-    @id
   end
 end
