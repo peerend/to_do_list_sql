@@ -13,7 +13,7 @@ class List
   end
 
   def self.all
-    results = DB.exec("SELECT * FROM lists")
+    results = DB.exec("SELECT * FROM lists;")
     lists = []
     results.each do |result|
       name = result['name']
