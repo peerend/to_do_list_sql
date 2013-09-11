@@ -6,6 +6,11 @@ describe List do
     list.should be_an_instance_of List
   end
 
+  it 'can be initialized with its database ID' do
+    list = List.new('Epicodus stuff', 1)
+    list.should be_an_instance_of List
+  end
+
   it 'tells you its name' do
     list = List.new('Epicodus stuff')
     list.name.should eq 'Epicodus stuff'
