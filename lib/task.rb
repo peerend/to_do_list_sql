@@ -1,7 +1,7 @@
 class Task
-  def initialize(name, list_id)
-    @name = name
-    @list_id = list_id
+  def initialize(attributes)
+    @name = attributes['name']
+    @list_id = attributes['list_id']
   end
 
   def name
@@ -18,7 +18,7 @@ class Task
     results.each do |result|
       name = result['name']
       list_id = result['list_id'].to_i
-      tasks << Task.new(name, list_id)
+      tasks << Task.new({'name' => name, 'list_id' => list_id})
     end
     tasks
   end

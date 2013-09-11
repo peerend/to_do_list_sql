@@ -1,7 +1,7 @@
 class List
-  def initialize(name, id=nil)
-    @name = name
-    @id = id
+  def initialize(attributes)
+    @name = attributes['name']
+    @id = attributes['id']
   end
 
   def name
@@ -17,8 +17,8 @@ class List
     lists = []
     results.each do |result|
       name = result['name']
-      id = results['id']
-      lists << List.new(name, id)
+      id = result['id'].to_i
+      lists << List.new({'name' => name, 'id' => id})
     end
     lists
   end
