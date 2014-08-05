@@ -39,4 +39,11 @@ describe Task do
     task2 = Task.new({'name' => 'learn SQL', 'list_id' => 1})
     task1.should eq task2
   end
+
+  it 'marks a task complete' do
+    task1 = Task.new({'name' => 'learn SQL', 'list_id' => 1})
+    task1.save
+    task1.complete_task
+    Task.all[0].completed.should eq 't'
+  end
 end
