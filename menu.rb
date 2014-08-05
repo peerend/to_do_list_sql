@@ -11,6 +11,7 @@ def main_menu
     puts "Press 'i' to input a task"
     puts "Press 'd' to delete a task"
     puts "Press 'l' to list tasks"
+    puts "press 'done' to mark a task as completed"
     puts "Press 'ld' to delete lists"
     puts "Press 'x' to exit"
 
@@ -26,6 +27,8 @@ def main_menu
         list_lists
       when 'l'
         task_list
+      when 'done'
+        completed_task
       when 'd'
         task_delete
       when 'x'
@@ -47,6 +50,17 @@ def add_list
   new_list.save
 end
 
+def completed_task
+  task_list
+  puts "Mark a task as completed"
+  user_input = gets.chomp.to_s
+  Task.all.each do |task|
+    if task.name == user_input
+      task.complete_task(user_input)
+    end
+  end
+end
+
 def list_delete
   list_lists
   puts "Input a list id to delete"
@@ -54,7 +68,6 @@ def list_delete
   List.all.each do |list|
     if list.id == user_input
       list.delete_list(user_input)
-
     end
   end
 end
@@ -95,7 +108,7 @@ def task_list
   puts "Here are your tasks!"
   Task.all.each do |task|
     if task.list_id == user_id
-      puts task.name
+      puts "#{task.name}" + '  ' + "#{task.completed}"
     end
   end
 end

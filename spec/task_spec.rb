@@ -43,7 +43,7 @@ describe Task do
   it 'marks a task complete' do
     task1 = Task.new({'name' => 'learn SQL', 'list_id' => 1})
     task1.save
-    task1.complete_task
+    task1.complete_task('learn SQL')
     Task.all[0].completed.should eq 't'
   end
 end

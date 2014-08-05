@@ -16,7 +16,6 @@ class Task
       name = result['name']
       list_id = result['list_id'].to_i
       completed = result['completed']
-      puts completed
       tasks << Task.new({'name' => name, 'list_id' => list_id, 'completed' => completed})
     end
     tasks
@@ -30,9 +29,8 @@ class Task
     DB.exec("SELECT FROM tasks WHERE list_id = #{user_id};")
   end
 
-  def complete_task
-    # puts self.completed
-    DB.exec("UPDATE tasks SET completed = true WHERE (name) = '#{self.name}';")
+  def complete_task(user_comp)
+    DB.exec("UPDATE tasks SET completed = true WHERE (name) = '#{user_comp}';")
     @completed = true
   end
 
