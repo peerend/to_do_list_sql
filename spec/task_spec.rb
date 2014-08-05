@@ -21,10 +21,18 @@ describe Task do
   end
 
   it 'lets you save tasks to the database' do
-    task = Task.new({'name' => 'learn SQL', 'list_id' => 1})
+    task = Task.new({'name' => 'learn SQL', 'list_id' => 0})
     task.save
     Task.all.should eq [task]
   end
+
+  it 'lets you delete tasks from the database' do
+    task = Task.new({'name' => 'learn SQL', 'list_id' => 1})
+    task.save
+    task.delete_task('learn SQL')
+    Task.all.should eq []
+  end
+
 
   it 'is the same task if it has the same name and list ID' do
     task1 = Task.new({'name' => 'learn SQL', 'list_id' => 1})
