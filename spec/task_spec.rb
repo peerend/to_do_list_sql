@@ -33,7 +33,6 @@ describe Task do
     Task.all.should eq []
   end
 
-
   it 'is the same task if it has the same name and list ID' do
     task1 = Task.new({'name' => 'learn SQL', 'list_id' => 1})
     task2 = Task.new({'name' => 'learn SQL', 'list_id' => 1})
@@ -45,5 +44,24 @@ describe Task do
     task1.save
     task1.complete_task('learn SQL')
     Task.all[0].completed.should eq 't'
+  end
+
+  it 'initializes a task with a due date' do
+    task1 = Task.new({'name'=> 'give date', 'list_id'=>1, 'due_date' => '2014-8-10'})
+    task1.save
+    task1.due_date.should eq '2014-8-10'
+  end
+
+  it 'sets a due date for a given task' do
+    task1 = Task.new({'name'=> 'give date', 'list_id'=>1})
+    task1.save
+    task1.add_deadline('2014-10-11')
+    Task.all[0].due_date.should eq '2014-10-11 00:00:00'
+  end
+
+  it 'sets a due date for today for a given task' do
+    task1 = Task.new({'name'=> 'give date', 'list_id'=>1})
+    task1.save
+    Task.all[0].due_date.should eq '2014-08-06 00:00:00'
   end
 end

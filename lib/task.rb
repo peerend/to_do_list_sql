@@ -1,12 +1,14 @@
+require 'date'
 require 'pg'
 
 class Task
-  attr_reader :name, :list_id, :completed
+  attr_reader :name, :list_id, :completed, :due_date
 
   def initialize(attributes)
     @name = attributes['name']
     @list_id = attributes['list_id']
     @completed = attributes['completed'] || false
+    @due_date = attributes['due_date'] || Date.today
   end
 
   def self.all
@@ -16,7 +18,8 @@ class Task
       name = result['name']
       list_id = result['list_id'].to_i
       completed = result['completed']
-      tasks << Task.new({'name' => name, 'list_id' => list_id, 'completed' => completed})
+      due_date = result['due_date']
+      tasks << Task.new({'name' => name, 'list_id' => list_id, 'completed' => completed, 'due_date'=> due_date})
     end
     tasks
   end
@@ -34,8 +37,12 @@ class Task
     @completed = true
   end
 
+  def add_deadline(user_date)
+    DB.exec("UPDATE tasks SET due_date = '#{user_date}';")
+  end
+
   def save
-    DB.exec("INSERT INTO tasks (name, list_id, completed) VALUES ('#{@name}', #{@list_id}, #{completed})")
+    DB.exec("INSERT INTO tasks (name, list_id, completed, due_date) VALUES ('#{@name}', #{@list_id}, #{@completed}, '#{@due_date}');")
   end
 
   def ==(another_task)
